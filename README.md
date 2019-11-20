@@ -14,7 +14,7 @@ AML (Advanced Mobile Location) is a location-based service available on smartpho
 You will need a installed and running webserver like Apache or nginx with modules _php_ and _curl_ enabled. Furthermore you will need the SSL certificate, it's password and the user data for the HTTP basic authentication. The certificate, it's password and the user data can be requested at the [control center of Freiburg](https://ils-freiburg.de/standortdaten.php) / [public-safety answering point (PSAP) of Freiburg](https://ils-freiburg.de/standortdaten.php).
 
 ## Configuration
-To get things work, you have to modify the `config.php` and enter your individual user data and passwords. Don't forget to add the relative path to the certificate. **NOTICE:** Be sure that the certificate is in `.pem` format and not `p.12`!
+To get things work, you have to modify the `config.php` and enter your individual user data and passwords. Don't forget to add the relative path to the certificate. **NOTICE:** Be sure that the certificate is in `.pem` format and not `.p12`!
 
 ### Example configuration file
 ```php
@@ -24,6 +24,23 @@ $curl_sslcert = "C:\\relative\\path\\to\\certificate.pem";
 $curl_sslcertpasswd = "ssl-certificate-password";
 $curl_user_agent = "Command Center FooBar";
 $curl_userpwd = "foo:bar";
+```
+
+### Changing marker position of command center
+
+### Include tile server for leaflet
+For displaying the map you will need an open street map tile server. A list of some available servers can be found [here](https://wiki.openstreetmap.org/wiki/Tile_servers). I recommend to use [maptiler.com](https://maptiler.com). To access the tile database you need to create a [account](https://www.maptiler.com/cloud/plans/) which use is free up to 100.000 requests/month.
+
+Choose a map and copy the api link from map tiler and insert it where the tile layer is added to the map.
+```javascript
+L.tileLayer(
+    "https://api-link-from-maptiler",
+    {
+        attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18
+    }
+).addTo(mymap);
 ```
 
 ## License
