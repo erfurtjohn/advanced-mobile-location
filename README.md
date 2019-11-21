@@ -1,7 +1,7 @@
 # Advanced Mobile Location
 AML (Advanced Mobile Location) is a location-based service available on smartphones for emergency purposes. When dialing the local emergency dial number (112), it sends the best available geolocation of the caller to an dedicated endpoint for making the location avaiable for the emergency call taker.
 
-This simple software was developed by the [office of fire and civil protection](https://www.hagen.de/web/de/fachbereiche/fb_37/fb_37_01/startseite.html) of Hagen, Germany. It allows you to enter a cell phone number whose location will be visualized on a open street map with all its location information like latitude, longitude, accuracy and much more.
+This simple software was developed by the [office for fire and civil protection](https://www.hagen.de/web/de/fachbereiche/fb_37/fb_37_01/startseite.html) of Hagen, Germany. It allows you to enter a cell phone number whose location will be visualized on a open street map with all its location information like latitude, longitude, accuracy and much more.
 
 **More information:**
 * [Wikipedia](https://en.wikipedia.org/wiki/Advanced_Mobile_Location)
