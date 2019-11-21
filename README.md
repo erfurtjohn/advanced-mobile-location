@@ -76,5 +76,8 @@ As a result from the endpoint you will get an json response: An array of objects
 ]
 ```
 
+## Leaflet documentation
+The leaflet API documentation can be found [here](https://leafletjs.com/reference-1.6.0.html).
+
 ## License
 Software is licensed under [GNU GPL 3.0](https://github.com/erfurtjohn/advanced-mobile-location/blob/master/LICENSE).
