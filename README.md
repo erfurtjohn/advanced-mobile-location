@@ -31,7 +31,7 @@ $curl_userpwd = "foo:bar";
 ### Changing marker position of command center
 
 ### Include tile server for leaflet
-For displaying the map you will need an open street map tile server. A list of some available servers can be found [here](https://wiki.openstreetmap.org/wiki/Tile_servers). I recommend to use [maptiler.com](https://maptiler.com). To access the tile database you need to create a [account](https://www.maptiler.com/cloud/plans/) which use is free up to 100.000 requests/month.
+For displaying the map you will need an open street map tile server. A list of some available servers can be found [here](https://wiki.openstreetmap.org/wiki/Tile_servers). I recommend to use [maptiler.com](https://maptiler.com). To access the tile database you need to create a [account](https://www.maptiler.com/cloud/plans/) whose use is free up to 100.000 requests/month.
 
 Choose a map and copy the api link from maptiler and insert it where the tile layer is added to the map.
 ```javascript
