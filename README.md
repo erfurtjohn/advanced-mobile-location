@@ -28,7 +28,14 @@ $curl_user_agent = "Command Center FooBar";
 $curl_userpwd = "foo:bar";
 ```
 
-### Changing marker position of command center
+### Changing default position of marker
+To change the default position of the command center marker, just replace the coordinates set for the variable `lstCoords` in file `src/js/script.js`.
+
+### Changing default view of map
+In file `src/js/script.js` variable `amlMap` is initialized. Change the given coordinates in `setView()` to your needs like this:
+```javascript
+    let amlMap = L.map("aml-map").setView([<your_latitude>, <your_longitude>], 17)
+```
 
 ### Include tile server for leaflet
 For displaying the map you will need an open street map tile server. A list of some available servers can be found [here](https://wiki.openstreetmap.org/wiki/Tile_servers). I recommend to use [maptiler.com](https://maptiler.com). To access the tile database you need to create a [account](https://www.maptiler.com/cloud/plans/) whose use is free up to 100.000 requests/month.
@@ -41,7 +48,32 @@ L.tileLayer(
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.maptiler.com/">Maptiler</a>',
         maxZoom: 18
     }
-).addTo(mymap);
+).addTo(amlMap);
+```
+
+## Example AML data
+As a result from the endpoint you will get an json response: An array of objects - each will represent a geolocation.
+
+```json
+[
+    {
+        "status": "ok",
+        "number": "1234567890",
+        "emergency_number": 112,
+        "time": "2019-111-21 09:26:55",
+        "location_latitude": "51.3739",
+        "location_longitude": "7.54545",
+        "location_time": "2019-11-21 09:26:56",
+        "location_altitude": "160.5",
+        "location_floor": "",
+        "location_source": "wifi",
+        "location_accuracy": "15.515",
+        "location_vertical_accuracy": "2.5",
+        "location_confidence": "0.6826895",
+        "location_bearing": "286.43103",
+        "location_speed": "0.08748341"
+    }
+]
 ```
 
 ## License
