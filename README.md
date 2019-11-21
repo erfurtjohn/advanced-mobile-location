@@ -1,6 +1,8 @@
 # Advanced Mobile Location
 AML (Advanced Mobile Location) is a location-based service available on smartphones for emergency purposes. When dialing the local emergency dial number (112), it sends the best available geolocation of the caller to an dedicated endpoint for making the location avaiable for the emergency call taker.
 
+This simple software was developed by the [office of fire and civil protection](https://www.hagen.de/web/de/fachbereiche/fb_37/fb_37_01/startseite.html) of Hagen, Germany. It allows you to enter a cell phone number whose location will be visualized on a open street map with all its location information like latitude, longitude, accuracy and much more.
+
 **More information:**
 * [Wikipedia](https://en.wikipedia.org/wiki/Advanced_Mobile_Location)
 * [Google ELS](https://crisisresponse.google/emergencylocationservice/how-it-works/)
@@ -31,7 +33,7 @@ $curl_userpwd = "foo:bar";
 ### Include tile server for leaflet
 For displaying the map you will need an open street map tile server. A list of some available servers can be found [here](https://wiki.openstreetmap.org/wiki/Tile_servers). I recommend to use [maptiler.com](https://maptiler.com). To access the tile database you need to create a [account](https://www.maptiler.com/cloud/plans/) which use is free up to 100.000 requests/month.
 
-Choose a map and copy the api link from map tiler and insert it where the tile layer is added to the map.
+Choose a map and copy the api link from maptiler and insert it where the tile layer is added to the map.
 ```javascript
 L.tileLayer(
     "https://api-link-from-maptiler",
