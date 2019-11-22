@@ -43,6 +43,8 @@ if (isset($_POST['phone']) && ($_POST['phone'] != '')) {
     // check if result is valid
     if (!empty($response) && $response != '[{"status":"no aml data"}]') {
         echo json_encode($response);
+    } else if (!empty($response) && $response == '[{"status":"no aml data"}]') {
+        echo json_encode(false);
     } else {
         echo json_encode(array("error" => $error));
     }
