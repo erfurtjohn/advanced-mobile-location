@@ -37,8 +37,8 @@ In file `src/js/script.js` variable `amlMap` is initialized. Change the given co
     let amlMap = L.map("aml-map").setView([<your_latitude>, <your_longitude>], 17)
 ```
 
-### Include tile server for leaflet
-For displaying the map you will need an open street map tile server. A list of some available servers can be found [here](https://wiki.openstreetmap.org/wiki/Tile_servers). I recommend to use [maptiler.com](https://maptiler.com). To access the tile database you need to create a [account](https://www.maptiler.com/cloud/plans/) whose use is free up to 100.000 requests/month.
+### Optional tile server for leaflet
+This software makes use of the free open street map tile server, which is required for displaying the map. A list of some available servers can be found [here](https://wiki.openstreetmap.org/wiki/Tile_servers). An optional tile server can be found on [maptiler.com](https://maptiler.com) (registration required).
 
 Choose a map and copy the api link from maptiler and insert it where the tile layer is added to the map.
 ```javascript

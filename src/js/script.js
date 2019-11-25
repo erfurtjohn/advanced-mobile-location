@@ -14,7 +14,7 @@ let amlMap = L.map("aml-map").setView([51.3739, 7.5448], 17),
     mapElem;
 
 L.tileLayer(
-    "https://link-to-tile-server/{x}/{y}/{z}",
+    "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
         attribution:
             'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="https://www.maptiler.com/">Maptiler</a>',
