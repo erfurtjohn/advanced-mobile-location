@@ -107,7 +107,7 @@ function sendData() {
                         ]).addTo(amlMap);
 
                         marker
-                            .bindPopup("Der Anrufer befindet sich ungefähr hier.")
+                            .bindPopup("Der Anrufer befindet sich ungef&auml;hr hier.")
                             .openPopup();
                     }
                 } else {
@@ -263,7 +263,7 @@ function switchToPosition(tr) {
     amlMap.removeLayer(marker);
     amlMap.setView([lat, lng], 17);
     marker = L.marker([lat, lng]).addTo(amlMap);
-    marker.bindPopup("Der Anrufer befindet sich ungefähr hier.").openPopup();
+    marker.bindPopup("Der Anrufer befindet sich ungef&auml;hr hier.").openPopup();
 
     // update input fields with current selected position data
     for (let prop in tr.dataset) {
