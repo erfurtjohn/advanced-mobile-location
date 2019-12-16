@@ -11,6 +11,7 @@ This simple software was developed by the [office for fire and civil protection]
 * https://www.iphone-ticker.de/notruf-sendet-position-aml-unterstuetzung-startet-in-deutschland-148070/
 * https://www.tagesschau.de/inland/notruf-standort-technik-101.html
 * https://www.rettungsdienst.de/tipps-wissen/erste-hilfe-notruf-ortung-ueber-das-smartphone-54314
+* https://www.heise.de/mac-and-i/meldung/Standortuebermittlung-bei-Notruf-Apple-unterstuetzt-nun-AML-in-Deutschland-4614976.html
 
 ## Requirements
 You will need a installed and running webserver like Apache or nginx with modules _php_ and _curl_ enabled. Furthermore you will need the SSL certificate, it's password and the user data for the HTTP basic authentication. The certificate, it's password and the user data can be requested at the [control center of Freiburg](https://ils-freiburg.de/standortdaten.php) / [public-safety answering point (PSAP) of Freiburg](https://ils-freiburg.de/standortdaten.php).
