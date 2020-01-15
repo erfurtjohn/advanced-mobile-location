@@ -347,3 +347,7 @@ $('#reloadPage').on('click', function () {
 $('#toggleMapHeight').on('click', function () {
     toggleMapHeight();
 });
+
+$('#toggleRefresh').on('click', function () {
+    toggleRefresh();
+});
