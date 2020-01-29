@@ -90,7 +90,12 @@ function sendData() {
                                     if (wArr.indexOf(loc[prop].toLowerCase()) > -1) $("#" + prop).val("wifi");
                                     if (gArr.indexOf(loc[prop].toLowerCase()) > -1) $("#" + prop).val("gps");
                                 } else {
-                                    $("#" + prop).val(loc[prop]);
+                                    if (prop == "location_latitude" || prop == "location_longitude") {
+                                        let insertVal = loc[prop].replace("+", "");
+                                        $("#" + prop).val(insertVal);
+                                    } else {
+                                        $("#" + prop).val(loc[prop]);
+                                    }
                                 }
                             }
                         }
