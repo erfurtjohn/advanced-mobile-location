@@ -1,3 +1,4 @@
 .vscode/*
 *.pem
 *.p12
+node_modules
