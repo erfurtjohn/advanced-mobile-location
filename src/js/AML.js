@@ -110,10 +110,17 @@ class AML {
                         phone: phone
                     },
                     success: function (data) {
-                        ctx.coordinates = data;
-                        ctx.positionate(data);
-                        ctx.buttons.showAllCoordinates.enable();
-                        ctx.buttons.refresh.enable();
+                        if (data && data.length > 0) {
+                            ctx.coordinates = data;
+                            ctx.positionate(data);
+                            ctx.buttons.showAllCoordinates.enable();
+                            ctx.buttons.refresh.enable();
+                        }
+
+                        if (data && data.error) {
+                            ctx.coordinates = false;
+                            ctx.showError(data.error);
+                        }
                     }
                 });
             }
@@ -257,5 +264,17 @@ class AML {
     refreshData() {
         this.map.removeLayer(this.locMarker);
         this.locate(this.phone);
+    }
+
+    showError(err) {
+        let contentContainer = document.getElementById("content"),
+            errorContainer = document.createElement("div");
+
+        errorContainer.innerHTML = '<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-body"><div class="icon-head"><span class="fas fa-exclamation-triangle"></span></div><h4>Error</h4><p>' + err + '</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="location.reload();">Neu laden</button></div></div></div></div>';
+
+        contentContainer.appendChild(errorContainer);
+
+        $("#errorModal").modal({ backdrop: 'static', keyboard: false });
+        $("#errorModal").modal("show");
     }
 }

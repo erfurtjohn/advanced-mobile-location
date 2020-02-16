@@ -142,3 +142,18 @@ body {
 .leaflet-bar.easy-button-container .leaflet-bar-part:hover {
     background-color: #f4f4f4;
 }
+
+#errorModal .icon-head {
+    text-align: center;
+    font-size: 55px;
+    color: #f15e5e;
+}
+
+#errorModal .modal-content h4 {
+    text-align: center;
+}
+
+#errorModal .modal-content p {
+    text-align: center;
+    padding: 0 50px;
+}

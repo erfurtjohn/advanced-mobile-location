@@ -62,7 +62,7 @@
             let centeredView = [51.37390, 7.54550],
                 controlCenter = [51.3739, 7.54545],
                 tileServer = " https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                debug = true;
+                debug = false;
 
             mapElem = document.getElementById("aml-map");
             mapElem.style.height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight + "px";
@@ -72,7 +72,7 @@
 </head>
 
 <body>
-    <div class="container-fluid content">
+    <div class="container-fluid content" id="content">
         <div class="row">
             <div class="col-md-12 map-container">
                 <div id="aml-map"></div>
