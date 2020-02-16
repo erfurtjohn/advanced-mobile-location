@@ -48,7 +48,13 @@ class AML {
     }
 
     createControls() {
+        let btns = [
+            L.easyButton('<span class="fab fa-github"></span>', function () {
+                window.open("https://github.com/erfurtjohn/advanced-mobile-location", "_blank");
+            })
+        ];
 
+        L.easyBar(btns).addTo(this.map);
     }
 
     locate(phone) {
@@ -118,6 +124,7 @@ class AML {
                 .openPopup();
 
             this.fillInputWithData(latestLoc);
+            this.displayResultsContainer();
         }
     }
 
@@ -127,5 +134,11 @@ class AML {
                 if (document.getElementById(prop) !== null) document.getElementById(prop).value = loc[prop];
             }
         }
+    }
+
+    displayResultsContainer() {
+        let container = document.getElementById("results-container");
+
+        container.style.display = "block";
     }
 }
