@@ -4,6 +4,7 @@ class AML {
         this.tile = tileServer;
         this.cc = controlCenterC;
         this.ccMarker;
+        this.phone;
         this.coordinates;
         this.locMarker;
         this.buttons = {
@@ -53,8 +54,6 @@ class AML {
     }
 
     createControls() {
-
-
         let ctx = this,
             btns;
 
@@ -79,7 +78,7 @@ class AML {
         });
 
         this.buttons.refresh = L.easyButton('<span class="fas fa-sync-alt"></span>', function () {
-            //
+            ctx.refreshData();
         }, "Aktualisieren");
 
         btns = [
@@ -96,28 +95,34 @@ class AML {
     }
 
     locate(phone) {
-        if (phone && !this.debugMode) {
-            let ctx = this;
+        if (phone) {
+            this.phone = phone;
 
-            $.ajax({
-                url: "src/php/request.php",
-                type: "POST",
-                timeout: 10000,
-                dataType: "JSON",
-                data: {
-                    phone: phone
-                },
-                success: function (data) {
-                    ctx.coordinates = data;
-                    ctx.positionate(data);
-                    ctx.buttons.showAllCoordinates.enable();
-                }
-            });
-        }
+            if (!this.debugMode) {
+                let ctx = this;
 
-        if (phone && this.debugMode) {
-            this.buttons.showAllCoordinates.enable();
-            this.positionate(this.getExampleData());
+                $.ajax({
+                    url: "src/php/request.php",
+                    type: "POST",
+                    timeout: 10000,
+                    dataType: "JSON",
+                    data: {
+                        phone: phone
+                    },
+                    success: function (data) {
+                        ctx.coordinates = data;
+                        ctx.positionate(data);
+                        ctx.buttons.showAllCoordinates.enable();
+                        ctx.buttons.refresh.enable();
+                    }
+                });
+            }
+
+            if (this.debugMode) {
+                this.buttons.showAllCoordinates.enable();
+                this.buttons.refresh.enable();
+                this.positionate(this.getExampleData());
+            }
         }
     }
 
@@ -247,5 +252,10 @@ class AML {
                 }
             }
         }
+    }
+
+    refreshData() {
+        this.map.removeLayer(this.locMarker);
+        this.locate(this.phone);
     }
 }
