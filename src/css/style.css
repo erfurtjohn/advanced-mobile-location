@@ -134,3 +134,7 @@ body {
     color: #aaa;
     background-color: #e8e8e8;
 }
+
+.leaflet-bar.easy-button-container .leaflet-bar-part:hover {
+    background-color: #f4f4f4;
+}
