@@ -78,18 +78,21 @@ class AML {
             }]
         });
 
+        this.buttons.refresh = L.easyButton('<span class="fas fa-sync-alt"></span>', function () {
+            //
+        }, "Aktualisieren");
+
         btns = [
             L.easyButton('<span class="fab fa-github"></span>', function () {
                 window.open("https://github.com/erfurtjohn/advanced-mobile-location", "_blank");
             }, "AML on GitHub"),
             this.buttons.showAllCoordinates,
-            L.easyButton('<span class="fas fa-sync-alt"></span>', function () {
-                //
-            }, "Aktualisieren")
+            this.buttons.refresh
         ];
 
         L.easyBar(btns).addTo(this.map);
         this.buttons.showAllCoordinates.disable();
+        this.buttons.refresh.disable();
     }
 
     locate(phone) {
