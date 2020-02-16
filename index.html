@@ -15,6 +15,7 @@
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/leaflet/dist/leaflet.js"></script>
+    <script src="node_modules/leaflet-easybutton/src/easy-button.js"></script>
 
     <script type="text/javascript" src="./src/js/AML.js"></script>
     <script>
@@ -136,8 +137,8 @@
         }, false);
 
         document.getElementById("sattelite-google-maps").addEventListener("click", function (e) {
-            let lat = document.getElementById("loc-latitude-value").value,
-                lng = document.getElementById("loc-longitude-value").value;
+            let lat = document.getElementById("location_latitude").value,
+                lng = document.getElementById("location_longitude").value;
 
             if (lat && lng) {
                 let url;
