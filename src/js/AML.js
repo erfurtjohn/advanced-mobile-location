@@ -4,7 +4,12 @@ class AML {
         this.tile = tileServer;
         this.cc = controlCenterC;
         this.ccMarker;
+        this.coordinates;
         this.locMarker;
+        this.buttons = {
+            showAllCoordinates: undefined,
+            refresh: undefined
+        };
         this.debugMode = debug;
 
         this.init();
@@ -48,13 +53,43 @@ class AML {
     }
 
     createControls() {
-        let btns = [
+
+
+        let ctx = this,
+            btns;
+
+        this.buttons.showAllCoordinates = L.easyButton({
+            states: [{
+                stateName: 'show-all-coordinates',
+                icon: 'far fa-eye',
+                title: 'Alle Koordinaten anzeigen',
+                onClick: function (control) {
+                    ctx.showAllCoordinates();
+                    control.state('hide-all-coordinates');
+                }
+            }, {
+                icon: 'far fa-eye-slash',
+                stateName: 'hide-all-coordinates',
+                onClick: function (control) {
+                    ctx.hideAllCoordinates();
+                    control.state('show-all-coordinates');
+                },
+                title: 'Alle Koordinaten verstecken'
+            }]
+        });
+
+        btns = [
             L.easyButton('<span class="fab fa-github"></span>', function () {
                 window.open("https://github.com/erfurtjohn/advanced-mobile-location", "_blank");
-            })
+            }, "AML on GitHub"),
+            this.buttons.showAllCoordinates,
+            L.easyButton('<span class="fas fa-sync-alt"></span>', function () {
+                //
+            }, "Aktualisieren")
         ];
 
         L.easyBar(btns).addTo(this.map);
+        this.buttons.showAllCoordinates.disable();
     }
 
     locate(phone) {
@@ -70,12 +105,15 @@ class AML {
                     phone: phone
                 },
                 success: function (data) {
+                    ctx.coordinates = data;
                     ctx.positionate(data);
+                    ctx.buttons.showAllCoordinates.enable();
                 }
             });
         }
 
         if (phone && this.debugMode) {
+            this.buttons.showAllCoordinates.enable();
             this.positionate(this.getExampleData());
         }
     }
@@ -86,7 +124,7 @@ class AML {
                 location_latitude: 51.3512,
                 location_longitude: 7.445,
                 location_time: "2019-10-17 09:27:29",
-                location_accuracy: "15.515",
+                location_accuracy: "89.567",
                 location_vertical_accuracy: "2.5",
                 location_altitude: "160.5",
                 location_source: "wifi",
@@ -97,17 +135,17 @@ class AML {
                 location_time: "2019-10-17 09:27:29",
                 location_accuracy: "15.515",
                 location_vertical_accuracy: "2.5",
-                location_altitude: "160.5",
+                location_altitude: "165.5",
                 location_source: "wifi",
             },
             {
                 location_latitude: 51.3849,
                 location_longitude: 7.4794,
                 location_time: "2019-10-17 09:27:29",
-                location_accuracy: "15.515",
+                location_accuracy: "86.313",
                 location_vertical_accuracy: "2.5",
-                location_altitude: "160.5",
-                location_source: "wifi"
+                location_altitude: "170.1",
+                location_source: "gps"
             },
             {
                 location_latitude: 51.3555,
@@ -115,7 +153,7 @@ class AML {
                 location_time: "2019-10-17 09:27:29",
                 location_accuracy: "15.515",
                 location_vertical_accuracy: "2.5",
-                location_altitude: "160.5",
+                location_altitude: "130.43",
                 location_source: "wifi",
             }
         ];
@@ -141,6 +179,7 @@ class AML {
 
             this.fillInputWithData(latestLoc);
             this.displayResultsContainer();
+            this.renderAllCoordinates(coordinates);
         }
     }
 
@@ -156,5 +195,54 @@ class AML {
         let container = document.getElementById("results-container");
 
         container.style.display = "block";
+    }
+
+    renderAllCoordinates(coordinates) {
+        let ctx = this, btnArray, tmplData = { coords: coordinates },
+            container = document.getElementById("coordinates-container"),
+            tmpl = $.templates("#tableTemplate");
+
+        container.innerHTML = tmpl.render(tmplData);
+
+        btnArray = document.querySelectorAll(".coordinates-table-button");
+
+        btnArray.forEach(function (elem) {
+            elem.addEventListener("click", function (event) {
+                ctx.locateFromTable(this.parentElement.parentElement);
+            });
+        });
+    }
+
+    showAllCoordinates() {
+        let coordsContainer = document.getElementById("coordinates-container");
+
+        coordsContainer.style.opacity = 1;
+    }
+
+    hideAllCoordinates() {
+        let coordsContainer = document.getElementById("coordinates-container");
+
+        coordsContainer.style.opacity = 0;
+    }
+
+    locateFromTable(elem) {
+        if (elem) {
+            let elems = document.querySelectorAll("#results-container input.form-control"),
+                lat = elem.dataset.location_latitude,
+                lng = elem.dataset.location_longitude;
+
+            this.map.removeLayer(this.locMarker);
+            this.map.setView([lat, lng], 17);
+            this.locMarker = L.marker([lat, lng]).addTo(this.map);
+            this.locMarker.bindPopup("Der Anrufer befindet sich ungef&auml;hr hier.").openPopup();
+
+            elems.forEach(function (elem) { elem.value = ""; });
+
+            for (let prop in elem.dataset) {
+                if (document.getElementById(prop) !== null) {
+                    document.getElementById(prop).value = elem.dataset[prop];
+                }
+            }
+        }
     }
 }

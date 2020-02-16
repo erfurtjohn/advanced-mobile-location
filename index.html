@@ -16,22 +16,57 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/leaflet/dist/leaflet.js"></script>
     <script src="node_modules/leaflet-easybutton/src/easy-button.js"></script>
+    <script src="node_modules/jsrender/jsrender.min.js"></script>
 
     <script type="text/javascript" src="./src/js/AML.js"></script>
+    <script id="tableTemplate" type="text/x-jsrender" src="./src/js/tmpl_table.js">
+        <table class="table table-striped table-hover table-sm" id="coordinates-table">
+            <thead>
+                <tr>
+                    <th colspan="5">Liste der Koordinaten</th>
+                </tr>
+                <tr>
+                    <th>Datum / Uhrzeit</th>
+                    <th>Breitengrad</th>
+                    <th>Längengrad</th>
+                    <th>Horiz. Genauigkeit (m)</th>
+                    <th></th>
+                </tr>
+            </thead>
+        
+            <tbody id="coordinates-table-body">
+                {{for coords}}
+                <tr
+                    class="coord-row"
+                    data-location_latitude="{{:location_latitude}}"
+                    data-location_longitude="{{:location_longitude}}"
+                    data-location_altitude="{{:location_altitude}}"
+                    data-location_source="{{:location_source}}"
+                    data-location_accuracy="{{:location_accuracy}}"
+                    data-location_accuracy-vert="{{:location_vertical_accuracy}}"
+                >
+                    <td>{{:location_time}}</td>
+                    <td>{{:location_latitude}}</td>
+                    <td>{{:location_longitude}}</td>
+                    <td>{{:location_accuracy}}</td>
+                    <td><button class="btn btn-primary coordinates-table-button"><span class="fas fa-map-marker-alt"></span></button></td>
+                </tr>
+                {{/for}}
+                    </tbody>
+        </table>
+    </script>
     <script>
         let aml, mapElem;
 
         window.onload = function () {
             let centeredView = [51.37390, 7.54550],
                 controlCenter = [51.3739, 7.54545],
-                tileServer = "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                tileServer = " https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 debug = true;
 
-            mapElem = document.getElementById("aml-map");
-            mapElem.style.height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight + "px";
-            aml = new AML(centeredView, controlCenter, tileServer, debug);
-        }
-    </script>
+            mapElem = document.getElementById("aml-map"); mapElem.style.height = isNaN(window.innerHeight) ? window.clientHeight
+                : window.innerHeight + "px"; aml = new AML(centeredView, controlCenter, tileServer, debug);
+        } </script>
 </head>
 
 <body>
@@ -112,6 +147,10 @@
 
             <button class="btn btn-primary btn-sm" id="sattelite-google-maps">Google Maps</button>
             <button class="btn btn-success btn-sm" id="new-aml-request">Neue Abfrage</button>
+        </div>
+
+        <div id="coordinates-container">
+
         </div>
     </div><!-- container -->
 

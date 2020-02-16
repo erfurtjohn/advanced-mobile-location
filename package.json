@@ -16,6 +16,7 @@
     "@fortawesome/fontawesome-free": "^5.12.1",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
+    "jsrender": "^1.0.5",
     "leaflet": "^1.6.0",
     "leaflet-easybutton": "^2.4.0"
   }
