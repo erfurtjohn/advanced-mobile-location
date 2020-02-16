@@ -146,7 +146,14 @@ body {
 #errorModal .icon-head {
     text-align: center;
     font-size: 55px;
+}
+
+#errorModal .icon-head .fa-exclamation-triangle {
     color: #f15e5e;
+}
+
+#errorModal .icon-head .fa-info-circle {
+    color: #2992ff;
 }
 
 #errorModal .modal-content h4 {

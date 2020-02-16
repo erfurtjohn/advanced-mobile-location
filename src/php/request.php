@@ -49,9 +49,9 @@ if (isset($_POST['phone']) && ($_POST['phone'] != '')) {
     if (!empty($response) && $response != '[{"status":"no aml data"}]') {
         echo json_encode($response);
     } else if (!empty($response) && $response == '[{"status":"no aml data"}]') {
-        echo json_encode(false);
+        echo json_encode(array("text" => "No aml data could be fetched from the aml server.", "type" => 2));
     } else {
-        echo json_encode(array("error" => $error));
+        echo json_encode(array("text" => $error, "type" => 1));
     }
 } else {
     echo json_encode(false);

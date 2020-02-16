@@ -117,9 +117,9 @@ class AML {
                             ctx.buttons.refresh.enable();
                         }
 
-                        if (data && data.error) {
+                        if (data && data.text && data.type) {
                             ctx.coordinates = false;
-                            ctx.showError(data.error);
+                            ctx.showError(data.text, data.type);
                         }
                     }
                 });
@@ -266,11 +266,22 @@ class AML {
         this.locate(this.phone);
     }
 
-    showError(err) {
-        let contentContainer = document.getElementById("content"),
+    showError(text, type) {
+        let icon, title, contentContainer = document.getElementById("content"),
             errorContainer = document.createElement("div");
 
-        errorContainer.innerHTML = '<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-body"><div class="icon-head"><span class="fas fa-exclamation-triangle"></span></div><h4>Error</h4><p>' + err + '</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="location.reload();">Neu laden</button></div></div></div></div>';
+        switch (type) {
+            case 1:
+                icon = "fas fa-exclamation-triangle";
+                title = "Error";
+                break;
+            case 2:
+                icon = "fas fa-info-circle";
+                title = "Information";
+                break;
+        }
+
+        errorContainer.innerHTML = '<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-body"><div class="icon-head"><span class="' + icon + '"></span></div><h4>' + title + '</h4><p>' + text + '</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="location.reload();">Aktualisieren</button></div></div></div></div>';
 
         contentContainer.appendChild(errorContainer);
 
