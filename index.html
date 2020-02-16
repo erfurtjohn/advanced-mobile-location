@@ -64,8 +64,10 @@
                 tileServer = " https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 debug = true;
 
-            mapElem = document.getElementById("aml-map"); mapElem.style.height = isNaN(window.innerHeight) ? window.clientHeight
-                : window.innerHeight + "px"; aml = new AML(centeredView, controlCenter, tileServer, debug);
+            mapElem = document.getElementById("aml-map");
+            mapElem.style.height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight + "px";
+
+            aml = new AML(centeredView, controlCenter, tileServer, debug);
         } </script>
 </head>
 
