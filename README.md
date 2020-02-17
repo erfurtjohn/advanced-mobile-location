@@ -1,7 +1,9 @@
 # Advanced Mobile Location
+![aml-preview](https://erfurtjohn.de/images/aml.gif)
+
 AML (Advanced Mobile Location) is a location-based service available on smartphones for emergency purposes. When dialing the local emergency dial number (112), it sends the best available geolocation of the caller to an dedicated endpoint for making the location avaiable for the emergency call taker.
 
-This simple software was developed by the [office for fire and civil protection](https://www.hagen.de/web/de/fachbereiche/fb_37/fb_37_01/startseite.html) of Hagen, Germany. It allows you to enter a cell phone number whose location will be visualized on a open street map with all its location information like latitude, longitude, accuracy and much more.
+This simple software allows you to enter a cell phone number whose location will be visualized on a open street map with all its location information like latitude, longitude, accuracy and much more.
 
 **More information:**
 * [Wikipedia](https://en.wikipedia.org/wiki/Advanced_Mobile_Location)
@@ -14,12 +16,13 @@ This simple software was developed by the [office for fire and civil protection]
 * https://www.heise.de/mac-and-i/meldung/Standortuebermittlung-bei-Notruf-Apple-unterstuetzt-nun-AML-in-Deutschland-4614976.html
 
 ## Requirements
-You will need a installed and running webserver like Apache or nginx with modules _php_ and _curl_ enabled. Furthermore you will need the SSL certificate, it's password and the user data for the HTTP basic authentication. The certificate, it's password and the user data can be requested at the [control center of Freiburg](https://ils-freiburg.de/standortdaten.php) / [public-safety answering point (PSAP) of Freiburg](https://ils-freiburg.de/standortdaten.php).
+You will need a installed and running webserver like Apache or nginx with modules _php_ and _curl_ enabled. Furthermore you will need the SSL certificate, it's password and the user data for the HTTP basic authentication. The certificate, it's password and the user data can be requested at the [control center of Freiburg](https://ils-freiburg.de/standortdaten.php) / [public-safety answering point (PSAP) of Freiburg](https://ils-freiburg.de/standortdaten.php). This repository is managed with npm, it requires node.js (npm) for installing it's required packages.
 
 ## Configuration
 To get things work, you have to modify the `config.php` and enter your individual user data and passwords. Don't forget to add the relative path to the certificate. **NOTICE:** Be sure that the certificate is in `.pem` format and not `.p12`!
+To fit the application for your needs, you can edit the lines 62-65 in `index.html` to display your correct control center, center the map, use the correct tile server and set debug mode to on/off.
 
-### Example configuration file
+### Example php configuration file
 ```php
 <?php
 $curl_url = "https://url-to-server:port/get-data?number=";
@@ -30,27 +33,27 @@ $curl_userpwd = "foo:bar";
 ```
 
 ### Changing default position of marker
-To change the default position of the command center marker, just replace the coordinates set for the variable `lstCoords` in file `src/js/script.js`.
+To change the default position of the command center marker, you just need to the replace the coordinates of the variable `controlCenter` in line 63 in `index.html`.
 
-### Changing default view of map
-In file `src/js/script.js` variable `amlMap` is initialized. Change the given coordinates in `setView()` to your needs like this:
+### Changing center position of map
+Basically replace the coordinates from the variable `centeredView` in line 62 in `index.html`.
+
+### Changing tile server
+This software makes use of the free open street map tile server, which is required for displaying the map. To change the tile server just replace the url string for the variable `tileServer` in line 64 in `index.html`.
+
+A list of some available servers can be found [here](https://wiki.openstreetmap.org/wiki/Tile_servers). An optional tile server can be found on [maptiler.com](https://maptiler.com) (registration required).
+
+### Example configuration
+The default configuration will look like the following:
 ```javascript
-    let amlMap = L.map("aml-map").setView([<your_latitude>, <your_longitude>], 17)
+let centeredView = [51.37390, 7.54550],
+    controlCenter = [51.3739, 7.54545],
+    tileServer = " https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    debug = true;
 ```
 
-### Optional tile server for leaflet
-This software makes use of the free open street map tile server, which is required for displaying the map. A list of some available servers can be found [here](https://wiki.openstreetmap.org/wiki/Tile_servers). An optional tile server can be found on [maptiler.com](https://maptiler.com) (registration required).
-
-To use an optional tile server copy and paste the api link where the tile layer is added to the map.
-```javascript
-L.tileLayer(
-    "https://api-link-from-maptiler",
-    {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.maptiler.com/">Maptiler</a>',
-        maxZoom: 18
-    }
-).addTo(amlMap);
-```
+## Debug mode
+The application comes with a small "debug mode". You enable it in line 65 in `index.html` where you set the value of variable `debug` to `true`. If you did so, you can enter any value in the phone number input field. Some example data will be loaded to display the functionallity of the application.
 
 ## Example AML data
 As a result from the endpoint you will get an json response: An array of objects - each will represent a geolocation.
