@@ -62,13 +62,14 @@
             let centeredView = [51.37390, 7.54550],
                 controlCenter = [51.3739, 7.54545],
                 tileServer = " https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                debug = false;
+                debug = true;
 
             mapElem = document.getElementById("aml-map");
             mapElem.style.height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight + "px";
 
             aml = new AML(centeredView, controlCenter, tileServer, debug);
-        } </script>
+        }
+    </script>
 </head>
 
 <body>
