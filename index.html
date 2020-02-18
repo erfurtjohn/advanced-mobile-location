@@ -37,15 +37,7 @@
         
             <tbody id="coordinates-table-body">
                 {{for coords}}
-                <tr
-                    class="coord-row"
-                    data-location_latitude="{{:location_latitude}}"
-                    data-location_longitude="{{:location_longitude}}"
-                    data-location_altitude="{{:location_altitude}}"
-                    data-location_source="{{:location_source}}"
-                    data-location_accuracy="{{:location_accuracy}}"
-                    data-location_accuracy-vert="{{:location_vertical_accuracy}}"
-                >
+                <tr class="coord-row" data-location_latitude="{{:location_latitude}}" data-location_longitude="{{:location_longitude}}" data-location_altitude="{{:location_altitude}}" data-location_source="{{:location_source}}" data-location_accuracy="{{:location_accuracy}}" data-location_accuracy-vert="{{:location_vertical_accuracy}}">
                     <td>{{:location_time}}</td>
                     <td>{{:location_latitude}}</td>
                     <td>{{:location_longitude}}</td>
@@ -53,7 +45,7 @@
                     <td><button class="btn btn-primary coordinates-table-button"><span class="fas fa-map-marker-alt"></span></button></td>
                 </tr>
                 {{/for}}
-                    </tbody>
+            </tbody>
         </table>
     </script>
     <script>
