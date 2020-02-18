@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script> -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="node_modules/leaflet/dist/leaflet.js"></script>
     <script src="node_modules/leaflet-easybutton/src/easy-button.js"></script>
     <script src="node_modules/jsrender/jsrender.min.js"></script>
@@ -197,7 +198,31 @@
         }, false);
 
         document.getElementById("copyButton").addEventListener("click", function (e) {
-            alert("kopiert");
+            let ctx = this,
+                copyVal,
+                tempElem;
+
+            $(this).tooltip({
+                title: "Kopiert!",
+                trigger: "manual",
+                placement: "bottom"
+            });
+
+            $(this).tooltip("show");
+
+            copyVal = document.getElementById("phonenumber-input").value;
+            tempElem = document.createElement("textarea");
+            tempElem.value = copyVal;
+            tempElem.style.width = "1px";
+            tempElem.style.height = "1px";
+            document.body.appendChild(tempElem);
+            tempElem.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempElem);
+
+            setTimeout(function () {
+                $(ctx).tooltip("hide");
+            }, 3000);
         }, false);
     </script>
 </body>
