@@ -62,7 +62,7 @@
         window.onload = function () {
             let centeredView = [51.37390, 7.54550],
                 controlCenter = [51.3739, 7.54545],
-                tileServer = " https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                tileServer = "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 debug = true;
 
             mapElem = document.getElementById("aml-map");
@@ -202,13 +202,13 @@
                 copyVal,
                 tempElem;
 
-            $(this).tooltip({
+            $("#phonenumber-input").tooltip({
                 title: "Kopiert!",
                 trigger: "manual",
                 placement: "bottom"
             });
 
-            $(this).tooltip("show");
+            $("#phonenumber-input").tooltip("show");
 
             copyVal = document.getElementById("phonenumber-input").value;
             tempElem = document.createElement("textarea");
@@ -221,7 +221,7 @@
             document.body.removeChild(tempElem);
 
             setTimeout(function () {
-                $(ctx).tooltip("hide");
+                $("#phonenumber-input").tooltip("hide");
             }, 3000);
         }, false);
     </script>

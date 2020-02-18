@@ -48,7 +48,7 @@ The default configuration will look like the following:
 ```javascript
 let centeredView = [51.37390, 7.54550],
     controlCenter = [51.3739, 7.54545],
-    tileServer = " https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    tileServer = "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
     debug = true;
 ```
 
