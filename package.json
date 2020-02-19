@@ -1,0 +1,23 @@
+{
+  "name": "advanced-mobile-location",
+  "version": "2.0.0",
+  "description": "Web application for requesting AML data from endpoint servers and visualize it on a open street map card.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erfurtjohn/advanced-mobile-location.git"
+  },
+  "author": "John Erfurt",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/erfurtjohn/advanced-mobile-location/issues"
+  },
+  "homepage": "https://github.com/erfurtjohn/advanced-mobile-location#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "jsrender": "^1.0.5",
+    "leaflet": "^1.6.0",
+    "leaflet-easybutton": "^2.4.0"
+  }
+}

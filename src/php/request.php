@@ -14,28 +14,33 @@ if (isset($_POST['phone']) && ($_POST['phone'] != '')) {
             throw new Exception('failed to initialize');
         }
 
-        curl_setopt($ch, CURLOPT_URL, $curl_url . $number);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_SSLCERT, $curl_sslcert);
-        curl_setopt($ch, CURLOPT_SSLCERTPASSWD, $curl_sslcertpasswd);
-        curl_setopt($ch, CURLOPT_USERAGENT, $curl_user_agent);
-        curl_setopt($ch, CURLOPT_USERPWD, $curl_userpwd);
-        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "accept: application/json",
-            "cache-control:no-cache",
-            "content-type:application/x-www-form-urlencoded"
-        ));
+        if (!empty($curl_sslcertpasswd) && !empty($curl_sslcert)) {
+            curl_setopt($ch, CURLOPT_URL, $curl_url . $number);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_SSLCERT, $curl_sslcert);
+            curl_setopt($ch, CURLOPT_SSLCERTPASSWD, $curl_sslcertpasswd);
+            curl_setopt($ch, CURLOPT_USERAGENT, $curl_user_agent);
+            curl_setopt($ch, CURLOPT_USERPWD, $curl_userpwd);
+            curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                "accept: application/json",
+                "cache-control:no-cache",
+                "content-type:application/x-www-form-urlencoded"
+            ));
 
-        $response = curl_exec($ch);
+            $response = curl_exec($ch);
 
-        // Check the return value of curl_exec()
-        if ($response === false) {
-            $error = curl_error($ch);
+            // Check the return value of curl_exec()
+            if ($response === false) {
+                $error = curl_error($ch);
+            }
+
+            // Close curl handle
+            curl_close($ch);
+        } else {
+            $response = false;
+            $error = "No curl access data were set in the config.php file!<br>Data could not be fetched.";
         }
-
-        // Close curl handle
-        curl_close($ch);
     } catch (Exception $e) {
         // throw exception
     }
@@ -44,9 +49,9 @@ if (isset($_POST['phone']) && ($_POST['phone'] != '')) {
     if (!empty($response) && $response != '[{"status":"no aml data"}]') {
         echo json_encode($response);
     } else if (!empty($response) && $response == '[{"status":"no aml data"}]') {
-        echo json_encode(false);
+        echo json_encode(array("text" => "No aml data could be fetched from the aml server.", "type" => 2));
     } else {
-        echo json_encode(array("error" => $error));
+        echo json_encode(array("text" => $error, "type" => 1));
     }
 } else {
     echo json_encode(false);
