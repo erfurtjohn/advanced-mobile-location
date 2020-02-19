@@ -175,9 +175,9 @@ class AML {
     }
 
     positionate(coordinates) {
-        if (coordinates && coordinates.length > 0) {
-            coordinates = JSON.parse(coordinates);
+        if (!this.debugMode) coordinates = JSON.parse(coordinates);
 
+        if (coordinates && coordinates.length > 0) {
             let latestLoc = coordinates[0];
 
             this.map.setView(
