@@ -111,7 +111,7 @@ class AML {
                     },
                     success: function (data) {
                         if (data && data.length > 0) {
-                            ctx.coordinates = data;
+                            ctx.coordinates = JSON.parse(data);
                             ctx.positionate(data);
                             ctx.buttons.showAllCoordinates.enable();
                             ctx.buttons.refresh.enable();
@@ -176,6 +176,8 @@ class AML {
 
     positionate(coordinates) {
         if (coordinates && coordinates.length > 0) {
+            coordinates = JSON.parse(coordinates);
+
             let latestLoc = coordinates[0];
 
             this.map.setView(
