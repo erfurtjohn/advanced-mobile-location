@@ -1,5 +1,5 @@
 # Advanced Mobile Location
-![aml-preview](https://erfurtjohn.de/images/aml.gif)
+![aml-preview](https://root.erfurtjohn.de/images/aml.gif)
 
 AML (Advanced Mobile Location) is a location-based service available on smartphones for emergency purposes. When dialing the local emergency dial number (112), it sends the best available geolocation of the caller to an dedicated endpoint for making the location avaiable for the emergency call taker.
 
