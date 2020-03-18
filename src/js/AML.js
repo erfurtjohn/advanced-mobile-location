@@ -104,23 +104,26 @@ class AML {
                 $.ajax({
                     url: "src/php/request.php",
                     type: "POST",
-                    timeout: 10000,
+                    timeout: 50000,
                     dataType: "JSON",
                     data: {
                         phone: phone
                     },
                     success: function (data) {
-                        if (data && data.length > 0) {
-                            ctx.coordinates = JSON.parse(data);
-                            ctx.positionate(data);
-                            ctx.buttons.showAllCoordinates.enable();
-                            ctx.buttons.refresh.enable();
-                        }
-
                         if (data && data.text && data.type) {
                             ctx.coordinates = false;
                             ctx.showError(data.text, data.type);
                         }
+
+                        if (data && data.length > 0) {
+                            ctx.coordinates = ctx.sortCoordinates(JSON.parse(data));
+                            ctx.positionate(ctx.sortCoordinates(JSON.parse(data)));
+                            ctx.buttons.showAllCoordinates.enable();
+                            ctx.buttons.refresh.enable();
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e);
                     }
                 });
             }
@@ -128,8 +131,14 @@ class AML {
             if (this.debugMode) {
                 this.buttons.showAllCoordinates.enable();
                 this.buttons.refresh.enable();
-                this.positionate(this.getExampleData());
+                this.positionate(this.sortCoordinates(this.getExampleData()));
             }
+        }
+    }
+
+    sortCoordinates(data) {
+        if (data && data.length > 0) {
+            return data.sort((a, b) => parseFloat(a.location_accuracy) - parseFloat(b.location_accuracy));
         }
     }
 
@@ -175,10 +184,14 @@ class AML {
     }
 
     positionate(coordinates) {
-        if (!this.debugMode) coordinates = JSON.parse(coordinates);
+        // if (!this.debugMode) coordinates = JSON.parse(coordinates);
 
         if (coordinates && coordinates.length > 0) {
-            let latestLoc = coordinates[0];
+            let latestLoc;
+
+            this.sortCoordinates(coordinates);
+
+            latestLoc = coordinates[0];
 
             this.map.setView(
                 [latestLoc.location_latitude, latestLoc.location_longitude],
