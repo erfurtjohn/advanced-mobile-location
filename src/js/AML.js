@@ -184,8 +184,6 @@ class AML {
     }
 
     positionate(coordinates) {
-        // if (!this.debugMode) coordinates = JSON.parse(coordinates);
-
         if (coordinates && coordinates.length > 0) {
             let latestLoc;
 
