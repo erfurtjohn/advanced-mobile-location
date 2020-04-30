@@ -1,6 +1,6 @@
 {
   "name": "advanced-mobile-location",
-  "version": "2.0.1",
+  "version": "2.1.1",
   "description": "Web application for requesting AML data from endpoint servers and visualize it on a open street map card.",
   "repository": {
     "type": "git",
