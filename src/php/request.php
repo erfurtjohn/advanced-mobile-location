@@ -39,7 +39,7 @@ if (isset($_POST['phone']) && ($_POST['phone'] != '')) {
             curl_close($ch);
         } else {
             $response = false;
-            $error = "No curl access data were set in the config.php file!<br>Data could not be fetched.";
+            $error = "config-err";
         }
     } catch (Exception $e) {
         // throw exception
@@ -49,7 +49,7 @@ if (isset($_POST['phone']) && ($_POST['phone'] != '')) {
     if (!empty($response) && $response != '[{"status":"no aml data"}]') {
         echo json_encode($response);
     } else if (!empty($response) && $response == '[{"status":"no aml data"}]') {
-        echo json_encode(array("text" => "No aml data could be fetched from the aml server.", "type" => 2));
+        echo json_encode(array("text" => "info-txt", "type" => 2));
     } else {
         echo json_encode(array("text" => $error, "type" => 1));
     }
