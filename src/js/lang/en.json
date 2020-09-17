@@ -1,0 +1,23 @@
+{
+    "list-coordinates":"List of coordinates",
+    "timestamp":"Date / time",
+    "accuracy-horizontal":"Horiz. accuracy (m)",
+    "accuracy-vertical":"Vert. accuracy",
+    "height-nn-m":"Height (in m)",
+    "refresh":"Refresh",
+    "retrieve":"Retrieve",
+    "location-data":"Location",
+    "latitude":"Latitude",
+    "longitude":"Longitude",
+    "data-source":"Source",
+    "google-maps":"Google Maps",
+    "new-request":"New request",
+    "show-all-coordinates":"Show all coordinates",
+    "hide-all-coordinates":"Hide all coordinates",
+    "aml-github":"AML on GitHub",
+    "location-found":"The position of the caller is approximately there.",
+    "error":"Error",
+    "info":"Information",
+    "info-text":"No aml data could be fetched from the aml server.",
+    "error-text":"No curl access data were set in the config.php file!<br>Data could not be fetched."
+}
