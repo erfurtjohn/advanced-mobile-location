@@ -80,6 +80,19 @@ As a result from the endpoint you will get an json response: An array of objects
 ]
 ```
 
+## Localization
+The software comes with a small localization using jquery's i18n library. English and german language file can be found in `src/js/lang`. 
+
+### Change language
+To change the language simply edit the second line of index.html and change the value of the `lang` attribute to `en` or `de`.
+
+### Add own language
+To add your own language you need to add a new json language file with the given language shortcut name like (en.json, de.json, ..) to `src/js/lang`. After that it's important to tell the library where your language file is stored. Append in `index.html` on line 59 with your language like in this given example for spanish:
+```
+'es': './src/js/lang/es.json',
+```
+And don't forget to change the `lang` attribute of the `html` in index.html in line 2.
+
 ## Leaflet documentation
 The leaflet API documentation can be found [here](https://leafletjs.com/reference-1.6.0.html).
 

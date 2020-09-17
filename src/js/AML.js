@@ -61,7 +61,7 @@ class AML {
             states: [{
                 stateName: 'show-all-coordinates',
                 icon: 'far fa-eye',
-                title: 'Alle Koordinaten anzeigen',
+                title: $.i18n('show-all-coordinates'),
                 onClick: function (control) {
                     ctx.showAllCoordinates();
                     control.state('hide-all-coordinates');
@@ -73,18 +73,18 @@ class AML {
                     ctx.hideAllCoordinates();
                     control.state('show-all-coordinates');
                 },
-                title: 'Alle Koordinaten verstecken'
+                title: $.i18n('hide-all-coordinates')
             }]
         });
 
         this.buttons.refresh = L.easyButton('<span class="fas fa-sync-alt"></span>', function () {
             ctx.refreshData();
-        }, "Aktualisieren");
+        }, $.i18n('refresh'));
 
         btns = [
             L.easyButton('<span class="fab fa-github"></span>', function () {
                 window.open("https://github.com/erfurtjohn/advanced-mobile-location", "_blank");
-            }, "AML on GitHub"),
+            }, $.i18n('aml-github')),
             this.buttons.showAllCoordinates,
             this.buttons.refresh
         ];
@@ -202,7 +202,7 @@ class AML {
             ]).addTo(this.map);
 
             this.locMarker
-                .bindPopup("Der Anrufer befindet sich ungef&auml;hr hier.")
+                .bindPopup($.i18n('location-found'))
                 .openPopup();
 
             this.fillInputWithData(latestLoc);
@@ -227,7 +227,7 @@ class AML {
 
     renderAllCoordinates(coordinates) {
         let ctx = this, btnArray, tmplData = { coords: coordinates },
-            container = document.getElementById("coordinates-container"),
+            container = document.getElementById("coordinates-table-body"),
             tmpl = $.templates("#tableTemplate");
 
         container.innerHTML = tmpl.render(tmplData);
@@ -262,7 +262,7 @@ class AML {
             this.map.removeLayer(this.locMarker);
             this.map.setView([lat, lng], 17);
             this.locMarker = L.marker([lat, lng]).addTo(this.map);
-            this.locMarker.bindPopup("Der Anrufer befindet sich ungef&auml;hr hier.").openPopup();
+            this.locMarker.bindPopup($.i18n('location-found')).openPopup();
 
             elems.forEach(function (elem) { elem.value = ""; });
 
@@ -286,15 +286,17 @@ class AML {
         switch (type) {
             case 1:
                 icon = "fas fa-exclamation-triangle";
-                title = "Error";
+                title = $.i18n('error');
+                text = $.i18n('error-text');
                 break;
             case 2:
                 icon = "fas fa-info-circle";
-                title = "Information";
+                title = $.i18n('info');
+                text = $.i18n('info-text');
                 break;
         }
 
-        errorContainer.innerHTML = '<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-body"><div class="icon-head"><span class="' + icon + '"></span></div><h4>' + title + '</h4><p>' + text + '</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="location.reload();">Aktualisieren</button></div></div></div></div>';
+        errorContainer.innerHTML = '<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-body"><div class="icon-head"><span class="' + icon + '"></span></div><h4>' + title + '</h4><p>' + text + '</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="location.reload();">' + $.i18n('refresh') + '</button></div></div></div></div>';
 
         contentContainer.appendChild(errorContainer);
 

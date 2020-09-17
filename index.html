@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>AML Standortabfrage</title>
+    <title>Advanced Mobile Location</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8" />
@@ -19,34 +19,25 @@
     <script src="node_modules/leaflet-easybutton/src/easy-button.js"></script>
     <script src="node_modules/jsrender/jsrender.min.js"></script>
 
+    <script src="node_modules/@wikimedia/jquery.i18n/libs/CLDRPluralRuleParser/src/CLDRPluralRuleParser.js"></script>
+	<script src="node_modules/@wikimedia/jquery.i18n/src/jquery.i18n.js"></script>
+	<script src="node_modules/@wikimedia/jquery.i18n/src/jquery.i18n.messagestore.js"></script>
+	<script src="node_modules/@wikimedia/jquery.i18n/src/jquery.i18n.fallbacks.js"></script>
+	<script src="node_modules/@wikimedia/jquery.i18n/src/jquery.i18n.parser.js"></script>
+	<script src="node_modules/@wikimedia/jquery.i18n/src/jquery.i18n.emitter.js"></script>
+	<script src="node_modules/@wikimedia/jquery.i18n/src/jquery.i18n.language.js"></script>
+
     <script type="text/javascript" src="./src/js/AML.js"></script>
-    <script id="tableTemplate" type="text/x-jsrender" src="./src/js/tmpl_table.js">
-        <table class="table table-striped table-hover table-sm" id="coordinates-table">
-            <thead>
-                <tr>
-                    <th colspan="5">Liste der Koordinaten</th>
-                </tr>
-                <tr>
-                    <th>Datum / Uhrzeit</th>
-                    <th>Breitengrad</th>
-                    <th>Längengrad</th>
-                    <th>Horiz. Genauigkeit (m)</th>
-                    <th></th>
-                </tr>
-            </thead>
-        
-            <tbody id="coordinates-table-body">
-                {{for coords}}
-                <tr class="coord-row" data-location_latitude="{{:location_latitude}}" data-location_longitude="{{:location_longitude}}" data-location_altitude="{{:location_altitude}}" data-location_source="{{:location_source}}" data-location_accuracy="{{:location_accuracy}}" data-location_accuracy-vert="{{:location_vertical_accuracy}}">
-                    <td>{{:location_time}}</td>
-                    <td>{{:location_latitude}}</td>
-                    <td>{{:location_longitude}}</td>
-                    <td>{{:location_accuracy}}</td>
-                    <td><button class="btn btn-primary coordinates-table-button"><span class="fas fa-map-marker-alt"></span></button></td>
-                </tr>
-                {{/for}}
-            </tbody>
-        </table>
+    <script id="tableTemplate" type="text/x-jsrender">
+        {{for coords}}
+        <tr class="coord-row" data-location_latitude="{{:location_latitude}}" data-location_longitude="{{:location_longitude}}" data-location_altitude="{{:location_altitude}}" data-location_source="{{:location_source}}" data-location_accuracy="{{:location_accuracy}}" data-location_accuracy-vert="{{:location_vertical_accuracy}}">
+            <td>{{:location_time}}</td>
+            <td>{{:location_latitude}}</td>
+            <td>{{:location_longitude}}</td>
+            <td>{{:location_accuracy}}</td>
+            <td><button class="btn btn-primary coordinates-table-button"><span class="fas fa-map-marker-alt"></span></button></td>
+        </tr>
+        {{/for}}
     </script>
     <script>
         let aml, mapElem;
@@ -62,6 +53,14 @@
 
             aml = new AML(centeredView, controlCenter, tileServer, debug);
         }
+
+        $.i18n().load({
+                'de': './src/js/lang/de.json',
+                'en': './src/js/lang/en.json',
+        }).done(function() {
+            console.log("localization loaded");
+            $('body').i18n();
+        });
     </script>
 </head>
 
@@ -87,7 +86,7 @@
                     </button>
                 </span>
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" id="locateButton" type="button">Abfragen</button>
+                    <button class="btn btn-primary" id="locateButton" type="button" data-i18n="retrieve">retrieve</button>
                 </span>
             </div>
         </div><!-- request-form -->
@@ -97,56 +96,73 @@
         </div>
 
         <div id="results-container">
-            <h5>Standortdaten</h5>
+            <h5 data-i18n="location-data">location-data</h5>
 
             <div class="input-group input-group-sm mb-3 loc-latitude">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Breitengrad</span>
+                    <span class="input-group-text" data-i18n="latitude">latitude</span>
                 </div>
                 <input type="text" class="form-control" id="location_latitude" readonly>
             </div>
 
             <div class="input-group input-group-sm mb-3 loc-longitude-container">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Längengrad</span>
+                    <span class="input-group-text" data-i18n="longitude">longitude</span>
                 </div>
                 <input type="text" class="form-control" id="location_longitude" readonly>
             </div>
 
             <div class="input-group input-group-sm mb-3 loc-altitude-container">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Höhe (über NN in m)</span>
+                    <span class="input-group-text" data-i18n="height-nn-m">height-nn-m</span>
                 </div>
                 <input type="text" class="form-control" id="location_altitude" readonly>
             </div>
 
             <div class="input-group input-group-sm mb-3 loc-source-container">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Datenquelle</span>
+                    <span class="input-group-text" data-i18n="data-source">data-source</span>
                 </div>
                 <input type="text" class="form-control" id="location_source" readonly>
             </div>
 
             <div class="input-group input-group-sm mb-3 loc-accuracy-container">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Horiz. Genauigkeit</span>
+                    <span class="input-group-text" data-i18n="accuracy-horizontal">accuracy-horizontal</span>
                 </div>
                 <input type="text" class="form-control" id="location_accuracy" readonly>
             </div>
 
             <div class="input-group input-group-sm mb-3 loc-vertical-accuracy-container">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Vert. Genauigkeit</span>
+                    <span class="input-group-text" data-i18n="accuracy-vertical">accuracy-vertical</span>
                 </div>
                 <input type="text" class="form-control" id="location_vertical_accuracy" readonly>
             </div>
 
-            <button class="btn btn-primary btn-sm" id="sattelite-google-maps">Google Maps</button>
-            <button class="btn btn-success btn-sm" id="new-aml-request">Neue Abfrage</button>
+            <button class="btn btn-primary btn-sm" id="sattelite-google-maps" data-i18n="google-maps">google-maps</button>
+            <button class="btn btn-success btn-sm" id="new-aml-request" data-i18n="new-request">new-request</button>
         </div>
 
         <div id="coordinates-container">
-
+            <table class="table table-striped table-hover table-sm" id="coordinates-table">
+                <thead>
+                    <tr>
+                        <th colspan="5" data-i18n="list-coordinates">list-coordinates</th>
+                    </tr>
+                    <tr>
+                        <th data-i18n="timestamp">timestamp</th>
+                        <th data-i18n="latitude">latitude</th>
+                        <th data-i18n="longitude">longitude</th>
+                        <th data-i18n="accuracy-horizontal">accuracy-horizontal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            
+                <tbody id="coordinates-table-body">
+                    
+                </tbody>
+            </table>
         </div>
     </div><!-- container -->
 
@@ -195,7 +211,7 @@
                 tempElem;
 
             $("#phonenumber-input").tooltip({
-                title: "Kopiert!",
+                title: $.i18n('copied'),
                 trigger: "manual",
                 placement: "bottom"
             });
