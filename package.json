@@ -14,6 +14,7 @@
   "homepage": "https://github.com/erfurtjohn/advanced-mobile-location#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.1",
+    "@wikimedia/jquery.i18n": "^1.0.7",
     "bootstrap": "^4.4.1",
     "jquery": ">=3.5.0",
     "jsrender": "^1.0.5",
