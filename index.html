@@ -232,6 +232,12 @@
                 $("#phonenumber-input").tooltip("hide");
             }, 3000);
         }, false);
+
+        window.addEventListener('resize', function () {
+            console.log("resize");
+            console.log(window.innerHeight);
+            document.getElementById('aml-map').style.height = window.innerHeight + 'px';
+        });
     </script>
 </body>
 
