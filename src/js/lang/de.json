@@ -3,7 +3,7 @@
     "timestamp":"Datum / Uhrzeit",
     "accuracy-horizontal":"Horiz. Genauigkeit (m)",
     "accuracy-vertical":"Vert. Genauigkeit",
-    "height-nn-m":"Höhe (über NN in m)",
+    "height-nn-m":"Höhe (in m)",
     "refresh":"Aktualisieren",
     "retrieve":"Abfragen",
     "copied":"Kopiert!",
