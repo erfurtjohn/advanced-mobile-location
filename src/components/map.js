@@ -25,7 +25,10 @@ const Map = ({
 			scrollWheelZoom={true}
 			style={{ height: "100%", width: "100%" }}
 		>
-			<TileLayer url={tileServer} />
+			<TileLayer
+				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+				url={tileServer}
+			/>
 			<Marker
 				icon={iconLst}
 				position={controlCenter}
