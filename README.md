@@ -1,8 +1,8 @@
 # Advanced Mobile Location
 
-AML (Advanced Mobile Location) ist ein Dienst zur Positionsbestimmung von Anrufern bei Nutzung einer Notrufnummer. Wird eine für AML verfügbare Notrufnummer gewählt, aktiviert das Mobilgerät automatisch GPS und WLAN und sendet - sobald das Gerät einen Standort ermitteln konnte - über SMS oder HTTPS alle verfügbaren Standortdaten an einen Endpunkt. An diesem Endpunkt können BOS-Leitstellen die entsprechenden Daten abgreifen.
+AML (Advanced Mobile Location) ist ein Dienst zur Positionsbestimmung von Anrufern bei Nutzung der Notrufnummer 112. Wird diese Notrufnummer gewählt, aktiviert das Mobilgerät automatisch GPS und WLAN und sendet - sobald das Gerät einen Standort ermitteln konnte - über SMS oder HTTPS alle verfügbaren Standortdaten an einen Endpunkt. An diesem Endpunkt können BOS-Leitstellen die entsprechenden Daten abgreifen.
 
-In der Software kann eine Mobilfunknummer eingegeben werden, für die im Nachgang bei der entsprechenden Stelle die Standortdaten abgerufen werden, welche u.a. den Breitengrad, Längengrad und Genauigkeit beinhalten.
+In der Software kann eine Mobilfunknummer eingegeben werden, für die im Nachgang bei der entsprechenden Stelle die Standortdaten abgerufen werden, welche u.a. den Breitengrad, Längengrad und Genauigkeit beinhalten. Alle weiteren übertragenen Parameter können in der Beschreibung der Schnittstelle von der LSt Freiburg entnommen werden.
 
 **Weitere Informationen:**
 
@@ -35,7 +35,7 @@ Folgende Umgebungsvariablen können in der `.env` Datei angepasst werden:
 | CONTROL_CENTER      | Koordinaten (Breitengrad, Längengrad) an der die LSt markiert werden soll    |
 | CONTROL_CENTER_NAME | Bezeichnung des LSt Markers                                                  |
 | TILE_SERVER         | Adresse des OSM Tile Servers.                                                |
-| DEV                 | Setzt den Testmodus; zeigt die Funktion anhand von Beispieldaten             |
+| EXAMPLES            | Setzt den Testmodus; zeigt die Funktion anhand von Beispieldaten             |
 
 Die Anwendung nutzt kostenlose OSM Tile Server, welche für die Darstellung der Karte benötigt werden. Alternative Tile Server sind [hier](https://wiki.openstreetmap.org/wiki/Tile_servers) zu finden. Optionale und u.U. kostenpflichtige Server gibt es [hier](https://maptiler.com). In der Regel wird aber jede Leitstelle einen eigenen WMS Server betreiben.
 
@@ -43,7 +43,7 @@ Die Anwendung nutzt kostenlose OSM Tile Server, welche für die Darstellung der 
 
 Den aktuellen Release (> 3.0) herunterladen und einfach auf den entsprechenden Server hochladen. Im Anschluss alle benötigten Pakete mit dem Befehl `npm i` installieren und das Projekt erstellen: `npm run build`. Zuletzt kann die Anwendung mit `npm run start` gestartet werden.
 
-### Client Zertifikat
+### Clientzertifikat
 
 Aus der erhaltenen `.p12` Zertifikatsdatei muss das Zertifikat und der Key extrahiert werden. Dazu können die folgenden Befehle benutzt werden:
 
